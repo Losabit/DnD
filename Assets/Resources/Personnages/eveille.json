@@ -1,0 +1,40 @@
+﻿{
+  "Personnage": {
+    "Name": "Eveille",
+    "Model": "Personnages/Models/Eveille",
+    "ActionPoints": 8,
+    "Health": 140,
+    "Mana": 200,
+    "Vigor": 60,
+    "Strength": 6,
+    "Intelligence": 16,
+    "Dexterity": 12,
+    "Charisma": 9,
+    "History": "Cet ancien moine est parvenu à atteindre l'éveil au bout d'un millénaire de méditation",
+    "Sorts": [
+      {
+        "Name": "Boule de feu",
+        "Animation": "../",
+        "Damage": 60,
+        "MinimumScope": 2,
+        "MaximumScope": 7,
+        "Cases": [
+          [ 0, 0 ],
+          [ 0, 1 ],
+          [ 0, 2 ],
+          [ 0, 3 ]
+        ],
+        "Effects": [
+          {
+            "Name": "DamageIncreased",
+            "Value": 20,
+            "Cases": [
+              [ 0, 0 ],
+              [ 0, 1 ]
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

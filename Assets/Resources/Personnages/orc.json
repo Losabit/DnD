@@ -1,0 +1,36 @@
+{
+  "Personnage": {
+    "Name": "Orc",
+    "Model": "Personnages/Models/Orc",
+    "Health": 180,
+    "Mana": 40,
+    "Vigor": 140,
+    "Strength": 16,
+    "Intelligence": 3,
+    "Dexterity": 12,
+    "Charisma": 8,
+    "History": "Orc des plaines",
+    "Sorts": [
+      {
+        "Name": "Frappe",
+        "Animation": "../",
+        "Damage": 80,
+        "MinimumScope": 1,
+        "MaximumScope": 1,
+        "Cases": [
+          [ 0, 0 ]
+        ],
+        "Effects": [
+          {
+            "Name": "DamageIncreased",
+            "Value": 20,
+            "Cases": [
+              [ 0, 0 ],
+              [ 0, 1 ]
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
