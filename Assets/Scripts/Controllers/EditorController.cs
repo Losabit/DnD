@@ -1,14 +1,17 @@
 ﻿using UnityEngine;
-using UnityEditor;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace Assets.Scripts.Controllers
 {
-    public class EditorController : ScriptableObject
+    public class EditorController : MonoBehaviour
     {
-        [MenuItem("Tools/MyTool/Do It in C#")]
-        static void DoIt()
+        public int[][] map;
+        public List<Personnage> personnages;
+
+        public void Start()
         {
-            EditorUtility.DisplayDialog("MyTool", "Do It in C# !", "OK", "");
+            
         }
     }
 }

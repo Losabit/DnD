@@ -65,9 +65,9 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\Controllers\EditorController.cs" />
     <Compile Include="Assets\Scripts\Controllers\FightController.cs" />
+    <Compile Include="Assets\Scripts\Controllers\GameController.cs" />
     <Compile Include="Assets\Scripts\Controllers\IAController.cs" />
     <Compile Include="Assets\Scripts\Controllers\PlayerController.cs" />
-    <Compile Include="Assets\Scripts\EventSender.cs" />
     <Compile Include="Assets\Scripts\GameLoader.cs" />
     <Compile Include="Assets\Scripts\MapGenerator.cs" />
     <Compile Include="Assets\Scripts\Modding\MapModding.cs" />
@@ -80,6 +80,8 @@
     <Compile Include="Assets\Scripts\UI\ListPersonnages.cs" />
     <Compile Include="Assets\Scripts\UI\MainMenu.cs" />
     <Compile Include="Assets\Scripts\UI\PersonnageEditor.cs" />
+    <Compile Include="Assets\Scripts\UI\TurnView.cs" />
+    <Compile Include="Assets\Scripts\Utils\EventSender.cs" />
     <Compile Include="Assets\Scripts\Utils\TimeKeeper.cs" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>C:/Users/quent/Documents/Unity/DnD/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>

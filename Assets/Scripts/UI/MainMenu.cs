@@ -40,6 +40,9 @@ public class MainMenu : MonoBehaviour
         });
         GameLoader loader = gameLoader.GetComponent<GameLoader>();
         loader.personnagesInit = dict;
+        loader.map = MapGenerator.InitRandomMap(20, 20, 0.15f);
+        loader.viewObject = toActivate;
+        loader.controllerType = Assets.Scripts.Controllers.ControllerType.Fight;
         gameLoader.SetActive(true);
         gameObject.SetActive(false);
     }
@@ -57,6 +60,7 @@ public class MainMenu : MonoBehaviour
         GameLoader loader = gameLoader.GetComponent<GameLoader>();
         loader.personnagesInit = dict;
         loader.map = MapGenerator.InitRandomMap(20, 20, 0f);
+        loader.controllerType = Assets.Scripts.Controllers.ControllerType.Editor;
         gameLoader.SetActive(true);
         gameObject.SetActive(false);
     }

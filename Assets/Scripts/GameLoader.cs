@@ -9,17 +9,19 @@ public class GameLoader : MonoBehaviour
     public GameObject mapObject;
     public GameObject playersObject;
     public GameObject gameController;
+    public GameObject viewObject;
     public bool drawLines = true;
+    public ControllerType controllerType = ControllerType.None;
 
     public int[][] map = null;
     public Dictionary<int, Personnage.Initialization> personnagesInit;
 
-    
+
     void Start()
     {
         if (map == null)
-            map = MapGenerator.InitRandomMap(20, 20, 0.15f);
-        
+            throw new Exception("map not given");
+
         DisplayMap(map, new Dictionary<int, string>
         {
             { 0, "Map/Floor" },
@@ -31,22 +33,45 @@ public class GameLoader : MonoBehaviour
         List<Personnage> personnages = new List<Personnage>();
         if (personnagesInit != null)
         {
-            foreach(int key in personnagesInit.Keys)
+            foreach (int key in personnagesInit.Keys)
             {
-                for(int i = 0; i < personnagesInit[key].numbers; i++)
+                for (int i = 0; i < personnagesInit[key].numbers; i++)
                 {
                     Models.Personnage personnageModel = PersonnageModding.GetPersonnage(personnagesInit[key].fichePath);
                     PlaceAtRandomPosition(personnageModel.Model, key);
                     personnages.Add(new Personnage(personnageModel, key));
                 }
+
             }
             playersObject.SetActive(true);
         }
 
-        FightController controller = gameController.AddComponent<FightController>();
-        controller.map = map;
-        controller.personnages = personnages;
-        gameController.SetActive(true);
+        if (controllerType != ControllerType.None)
+        {
+            LoadCorrectController(personnages);
+        }
+
+
+    }
+
+    private void LoadCorrectController(List<Personnage> personnages)
+    {
+
+        if (controllerType == ControllerType.Fight)
+        {
+            FightController controller = gameController.AddComponent<FightController>();
+            controller.map = map;
+            controller.personnages = personnages;
+            controller.turnView = viewObject.GetComponentInChildren<TurnView>();
+            gameController.SetActive(true);
+        }
+        else if (controllerType == ControllerType.Editor)
+        {
+            EditorController controller = gameController.AddComponent<EditorController>();
+            controller.map = map;
+            controller.personnages = personnages;
+            gameController.SetActive(true);
+        }
     }
 
 
@@ -117,7 +142,7 @@ public class GameLoader : MonoBehaviour
     {
         foreach (Transform child in mapObject.transform)
         {
-            if(child.tag == "line")
+            if (child.tag == "line")
                 Destroy(child.gameObject);
         }
     }
@@ -157,7 +182,7 @@ public class GameLoader : MonoBehaviour
         {
             throw new Exception("can't load personnage : " + path);
         }
-      
+
         Transform player = Instantiate(personnage.transform);
         player.position = vector;
         player.SetParent(playersObject.transform, false);
