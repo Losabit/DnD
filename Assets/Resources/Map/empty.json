@@ -1,13 +1,16 @@
+//Type 2 = trou dans la map
 {
   "xSize": 20,
   "zSize": 20,
   "Models": [
     {
       "Value": 0,
+      "Type": 0,
       "Path": "Models/Floor"
     },
     {
       "Value": -1,
+      "Type": 1,
       "Path": "Models/Wall"
     }
   ],

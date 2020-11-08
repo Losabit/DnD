@@ -7,6 +7,8 @@ TagManager:
   - MouseOver
   - ListPersonnage
   - line
+  - ActionPoints
+  - Map
   layers:
   - Default
   - TransparentFX

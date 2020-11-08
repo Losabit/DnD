@@ -8,7 +8,7 @@ using UnityEngine.UI;
 class ListPersonnages : MonoBehaviour
 {
     public GameObject textObject;
-    public GameObject empty;
+    //public GameObject empty;
 
     private void Awake()
     {

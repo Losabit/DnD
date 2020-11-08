@@ -2,7 +2,7 @@
   "Personnage": {
     "Name": "Eveille",
     "Model": "Personnages/Models/Eveille",
-    "ActionPoints": 8,
+    "ActionPoints": 4,
     "Health": 140,
     "Mana": 200,
     "Vigor": 60,
@@ -13,25 +13,79 @@
     "History": "Cet ancien moine est parvenu à atteindre l'éveil au bout d'un millénaire de méditation",
     "Sorts": [
       {
-        "Name": "Boule de feu",
+        "Name": "Frappe",
+        "Icone": "Personnages/Sorts/Icones/epee",
         "Animation": "../",
-        "Damage": 60,
-        "MinimumScope": 2,
-        "MaximumScope": 7,
+        "Damage": 80,
+        "ActionPoints": 1,
+        "MinimumScope": 1,
+        "MaximumScope": 1,
         "Cases": [
-          [ 0, 0 ],
-          [ 0, 1 ],
-          [ 0, 2 ],
-          [ 0, 3 ]
+          [ 0, 0 ]
         ],
         "Effects": [
           {
             "Name": "DamageIncreased",
             "Value": 20,
             "Cases": [
-              [ 0, 0 ],
-              [ 0, 1 ]
+              [ 0, 0 ]
             ]
+          }
+        ]
+      },
+      {
+        "Name": "Boule de feu",
+        "Icone": "Personnages/Sorts/Icones/fireball",
+        "Animation": "Personnages/Sorts/Models/fireball/fireball",
+        "PersonnageAnimation": "Personnages/Sorts/Models/fireball/Personnage",
+        "Damage": 60,
+        "ActionPoints": 2,
+        "MinimumScope": 3,
+        "MaximumScope": 7,
+        "Cases": [
+          [ 0, 0 ],
+          [ 0, 1 ],
+          [ 0, -1 ],
+          [ 1, 0 ],
+          [ -1, 0 ],
+          [ 1, 1 ],
+          [ 1, -1 ],
+          [ -1, 1 ],
+          [ -1, -1 ]
+        ],
+        "Effects": [
+          {
+            "Name": "DamageIncreased",
+            "Value": 20,
+            "Cases": [
+              [ 0, 0 ]
+            ]
+          }
+        ]
+      },
+      {
+        "Name": "Rune Magique",
+        "Icone": "Personnages/Sorts/Icones/rune",
+        "Animation": "../",
+        "Damage": 0,
+        "ActionPoints": 2,
+        "MinimumScope": 1,
+        "MaximumScope": 6,
+        "Cases": [
+          [ 0, 0 ],
+          [ 0, 1 ],
+          [ 0, -1 ],
+          [ 1, 0 ],
+          [ -1, 0 ],
+          [ 1, 1 ],
+          [ 1, -1 ],
+          [ -1, 1 ],
+          [ -1, -1 ]
+        ],
+        "Effects": [
+          {
+            "Name": "Rune",
+            "Value": 30
           }
         ]
       }

@@ -29,6 +29,9 @@ namespace Models
     {
         public string Name { get; set; }
         public string Animation { get; set; }
+        public string PersonnageAnimation { get; set; }
+        public string Icone { get; set; }
+        public int ActionPoints { get; set; }
         public int Damage { get; set; }
         public int MinimumScope { get; set; }
         public int MaximumScope { get; set; }

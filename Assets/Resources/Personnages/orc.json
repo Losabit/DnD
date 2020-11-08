@@ -2,6 +2,7 @@
   "Personnage": {
     "Name": "Orc",
     "Model": "Personnages/Models/Orc",
+    "ActionPoints": 3,
     "Health": 180,
     "Mana": 40,
     "Vigor": 140,
@@ -25,8 +26,7 @@
             "Name": "DamageIncreased",
             "Value": 20,
             "Cases": [
-              [ 0, 0 ],
-              [ 0, 1 ]
+              [ 0, 0 ]
             ]
           }
         ]

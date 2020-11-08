@@ -1,0 +1,25 @@
+{
+  "Sorts": [
+    {
+      "Name": "Frappe",
+      "Animation": "../",
+      "Damage": 80,
+      "MinimumScope": 1,
+      "MaximumScope": 1,
+      "Cases": [
+        [ 0, 0 ]
+      ],
+      "Effects": [
+        {
+          "Name": "DamageIncreased",
+          "Value": 20,
+          "Cases": [
+            [ 0, 0 ],
+            [ 0, 1 ]
+          ]
+        }
+      ]
+    }
+  ]
+
+}

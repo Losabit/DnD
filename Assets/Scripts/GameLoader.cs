@@ -31,6 +31,7 @@ public class GameLoader : MonoBehaviour
         mapObject.SetActive(true);
 
         List<Personnage> personnages = new List<Personnage>();
+        List<FightPlayController> personnagesController = new List<FightPlayController>();
         if (personnagesInit != null)
         {
             foreach (int key in personnagesInit.Keys)
@@ -38,8 +39,11 @@ public class GameLoader : MonoBehaviour
                 for (int i = 0; i < personnagesInit[key].numbers; i++)
                 {
                     Models.Personnage personnageModel = PersonnageModding.GetPersonnage(personnagesInit[key].fichePath);
-                    PlaceAtRandomPosition(personnageModel.Model, key);
-                    personnages.Add(new Personnage(personnageModel, key));
+                    Personnage fichePersonnage = new Personnage(personnageModel, key);
+                    FightPlayController fightController = PlaceAtRandomPosition(personnageModel.Model, key);
+                    fightController.personnage = fichePersonnage;
+                    personnagesController.Add(fightController);
+                    personnages.Add(fichePersonnage);
                 }
 
             }
@@ -48,13 +52,13 @@ public class GameLoader : MonoBehaviour
 
         if (controllerType != ControllerType.None)
         {
-            LoadCorrectController(personnages);
+            LoadCorrectController(personnages, personnagesController);
         }
 
 
     }
 
-    private void LoadCorrectController(List<Personnage> personnages)
+    private void LoadCorrectController(List<Personnage> personnages, List<FightPlayController> personnagesController)
     {
 
         if (controllerType == ControllerType.Fight)
@@ -62,7 +66,8 @@ public class GameLoader : MonoBehaviour
             FightController controller = gameController.AddComponent<FightController>();
             controller.map = map;
             controller.personnages = personnages;
-            controller.turnView = viewObject.GetComponentInChildren<TurnView>();
+            controller.fightPlayController = personnagesController;
+            controller.view = viewObject;
             gameController.SetActive(true);
         }
         else if (controllerType == ControllerType.Editor)
@@ -164,8 +169,8 @@ public class GameLoader : MonoBehaviour
     }
 
 
-    //Perosnnage
-    private void PlaceAtRandomPosition(string path, int value)
+    //Personnage
+    private FightPlayController PlaceAtRandomPosition(string path, int value)
     {
         Vector3 vector = new Vector3();
 
@@ -174,7 +179,7 @@ public class GameLoader : MonoBehaviour
             vector.z = UnityEngine.Random.Range(0, map.Length);
             vector.x = UnityEngine.Random.Range(0, map[(int)vector.z].Length);
         } while (map[(int)vector.z][(int)vector.x] != 0);
-        map[(int)vector.z][(int)vector.x] = 1;
+        map[(int)vector.z][(int)vector.x] = value;
         vector.y = 1;
 
         GameObject personnage = (GameObject)Resources.Load(path);
@@ -186,5 +191,14 @@ public class GameLoader : MonoBehaviour
         Transform player = Instantiate(personnage.transform);
         player.position = vector;
         player.SetParent(playersObject.transform, false);
+        if(value == 1)
+        {
+            return player.gameObject.AddComponent<PlayerController>();
+        }
+        else
+        {
+            return player.gameObject.AddComponent<IAController>();
+        }
+       
     }
 }
