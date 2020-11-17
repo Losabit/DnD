@@ -2,7 +2,7 @@
   "Personnage": {
     "Name": "Orc",
     "Model": "Personnages/Models/Orc",
-    "ActionPoints": 3,
+    "ActionPoints": 4,
     "Health": 180,
     "Mana": 40,
     "Vigor": 140,
@@ -14,8 +14,10 @@
     "Sorts": [
       {
         "Name": "Frappe",
+        "Icone": "Personnages/Sorts/Icones/epee",
         "Animation": "../",
         "Damage": 80,
+        "ActionPoints": 2,
         "MinimumScope": 1,
         "MaximumScope": 1,
         "Cases": [

@@ -9,6 +9,7 @@ using UnityEngine.UI;
 public class FightView : MonoBehaviour
 {
     public int pointsAction;
+    public PlayerController playerController;
 
     private int oldPointsAction = -1;
     private Text pointsActionText;
@@ -23,6 +24,15 @@ public class FightView : MonoBehaviour
                 pointsActionText = child.GetComponentInChildren<Text>();
             }
         }
+    }
+
+    public void EndTurnOnClick()
+    {
+        if(playerController == null)
+        {
+            throw new Exception("Player not link to the button");
+        }
+        playerController.canPlay = false;
     }
 
     private void Update()

@@ -42,6 +42,7 @@ public class GameLoader : MonoBehaviour
                     Personnage fichePersonnage = new Personnage(personnageModel, key);
                     FightPlayController fightController = PlaceAtRandomPosition(personnageModel.Model, key);
                     fightController.personnage = fichePersonnage;
+                    fightController.map = map;
                     personnagesController.Add(fightController);
                     personnages.Add(fichePersonnage);
                 }

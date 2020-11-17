@@ -23,13 +23,13 @@ public class PlayerController : FightPlayController
     {
         mapObject = GameObject.FindGameObjectsWithTag("Map")[0];
         material = (Material)Resources.Load("Fight/OverCaseMaterial");
+        position = new Vector2(transform.localPosition.x, transform.localPosition.z);
     }
 
     Ray ray;
     RaycastHit hit;
     void Update()
     {
-
         if (view != null && sortsPrinter == null)
         {
             sortsPrinter = view.GetComponentInChildren<SortsPrinter>();
@@ -37,6 +37,7 @@ public class PlayerController : FightPlayController
             sortsPrinter.personnagePosition = transform.position;
             sortsPrinter.map = map;
             fightView = view.GetComponent<FightView>();
+            fightView.playerController = this;
             fightView.pointsAction = personnage.currentActionPoints;
         }
 
@@ -66,7 +67,7 @@ public class PlayerController : FightPlayController
             if (Physics.Raycast(ray, out hit)
                 && material != null && hit.collider.tag == "MouseOver")
             {
-                int distance = (int)CaseDistance(transform.localPosition, hit.collider.transform.position);
+                int distance = (int)GetDistance(transform.localPosition, hit.collider.transform.position);
                 if (hits.Count != 0 && hit.collider.transform.position != hits[0].position)
                 {
                     CleanMap();
@@ -106,9 +107,9 @@ public class PlayerController : FightPlayController
                 if (Input.GetMouseButtonDown(0)
                      && distance <= personnage.currentActionPoints)
                 {
-                    transform.localPosition = hit.collider.transform.position;
-                    //map[?][?] = 1;
-                    personnage.currentActionPoints -= distance;
+                   // transform.localPosition = hit.collider.transform.position;
+                    Move((int)hit.collider.transform.position.x, (int)hit.collider.transform.position.z);
+                   // personnage.currentActionPoints -= distance;
                     fightView.pointsAction = personnage.currentActionPoints;
                     if (sortsPrinter == null)
                         Debug.Log("sortPrinter not defined");
@@ -146,10 +147,5 @@ public class PlayerController : FightPlayController
     }
 
 
-    private float CaseDistance(Vector3 start, Vector3 end)
-    {
-        return Mathf.Abs(start.x - end.x) +
-            Mathf.Abs(start.y - end.y) +
-            Mathf.Abs(start.z - end.z);
-    }
+   
 }

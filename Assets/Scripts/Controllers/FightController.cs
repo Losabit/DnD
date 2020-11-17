@@ -45,6 +45,11 @@ namespace Assets.Scripts.Controllers
             if (personnages != null && map != null)
             {
                 StartCoroutine(controlTurn.ReturnOrIncrease(Time.deltaTime));
+                if(fightPlayController[turn].canPlay == false)
+                {
+                    StartCoroutine(ChangeTurn());
+                    controlTurn.value = 0f;
+                }
             }
         }
 

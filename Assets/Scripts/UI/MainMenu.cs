@@ -64,5 +64,16 @@ public class MainMenu : MonoBehaviour
         gameLoader.SetActive(true);
         gameObject.SetActive(false);
     }
+
+    public void MapEditorButtonOnClick(GameObject toActivate)
+    {
+        toActivate.SetActive(true);
+
+        GameLoader loader = gameLoader.GetComponent<GameLoader>();
+        loader.map = MapGenerator.InitRandomMap(20, 20, 0f);
+        loader.controllerType = Assets.Scripts.Controllers.ControllerType.Editor;
+        gameLoader.SetActive(true);
+        gameObject.SetActive(false);
+    }
 }
 
