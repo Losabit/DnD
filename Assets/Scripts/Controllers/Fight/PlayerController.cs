@@ -11,7 +11,6 @@ public class PlayerController : FightPlayController
     public GameObject view;
 
     private Material material;
-    private List<Material> defautMaterials = new List<Material>();
     private List<Transform> hits = new List<Transform>();
     private bool clean = true;
     private GameObject mapObject;
@@ -89,8 +88,7 @@ public class PlayerController : FightPlayController
                             if (path.Where(x => new Vector3(x.x, 1f, x.y) == child.position).ToList().Count > 0 &&
                                 child.GetComponent<MeshRenderer>().material.name.Replace(" (Instance)", "") != material.name)
                             {
-                                defautMaterials.Add(child.GetComponent<MeshRenderer>().material);
-                                child.GetComponent<MeshRenderer>().material = material;
+                                child.GetComponent<MeshRenderer>().materials = new Material[] { child.GetComponent<MeshRenderer>().material, material }; ;
                                 if (hit.collider.transform.position != child.position)
                                     hits.Add(child);
                                 else
@@ -132,17 +130,11 @@ public class PlayerController : FightPlayController
 
     private void CleanMap()
     {
-        if (hits.Count != defautMaterials.Count)
-            Debug.Log("hits Count : " + hits.Count + " / default Materials Count : " + defautMaterials.Count);
-
         for (int i = 0; i < hits.Count; i++)
         {
-            if (defautMaterials[i] == null)
-                throw new System.Exception("Old Material not found");
-            hits[i].GetComponent<MeshRenderer>().material = defautMaterials[i];
+            hits[i].GetComponent<MeshRenderer>().materials = new Material[] { hits[i].GetComponent<MeshRenderer>().materials[0] };
         }
         hits.Clear();
-        defautMaterials.Clear();
         clean = true;
     }
 

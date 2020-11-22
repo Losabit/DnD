@@ -21,15 +21,14 @@ public class SortPrevisualisation : MonoBehaviour, IPointerEnterHandler, IPointe
     private Material sortMaterial;
     private Vector3 oldPersonnagePosition = new Vector3();
     private List<Vector3> touchedCases = new List<Vector3>();
-    private List<Material> defaultMaterials = new List<Material>();
     private List<Transform> childs = new List<Transform>();
 
     private List<Transform> oldsHitedCases = new List<Transform>();
     private Vector3 oldHitPosition = new Vector3(666, 666, 666);
-    private List<Material> hitedMaterials = new List<Material>();
 
     //garder seuleument les positions intéressantes
     // ne pas parcourir les 800 objects a chaque mais le faire méthodiquement ? // 0 -> 0,0 // 1 -> 0,1
+    //Quelques probleme quand le sort va vite
     void Start()
     {
         readyToLaunchSort = false;
@@ -62,10 +61,13 @@ public class SortPrevisualisation : MonoBehaviour, IPointerEnterHandler, IPointe
                     {
                         for (int i = 0; i < oldsHitedCases.Count; i++)
                         {
-                            oldsHitedCases[i].GetComponent<MeshRenderer>().material = hitedMaterials[i];
+                            if (touchedCases.Where(x => new Vector3(x.x, 1f, x.z) == oldsHitedCases[i].position).ToList().Count > 0)
+                                oldsHitedCases[i].GetComponent<MeshRenderer>().materials = new Material[] { oldsHitedCases[i].GetComponent<MeshRenderer>().material, material };
+                            else
+                                oldsHitedCases[i].GetComponent<MeshRenderer>().materials = new Material[] { oldsHitedCases[i].GetComponent<MeshRenderer>().material };
+
                         }
                         oldsHitedCases.Clear();
-                        hitedMaterials.Clear();
                     }
                     else if (childs.Where(x => x.position == hit.collider.transform.position).Count() > 0)
                     {
@@ -75,8 +77,7 @@ public class SortPrevisualisation : MonoBehaviour, IPointerEnterHandler, IPointe
                             Transform child = mapObject.transform.GetChild(i);
                             if (vectors.Where(x => x == child.position).ToList().Count > 0 && child.tag == "MouseOver")
                             {
-                                hitedMaterials.Add(child.GetComponent<MeshRenderer>().material);
-                                child.GetComponent<MeshRenderer>().material = sortMaterial;
+                                child.GetComponent<MeshRenderer>().materials = new Material[] { child.GetComponent<MeshRenderer>().material, sortMaterial };
                                 oldsHitedCases.Add(child);
                             }
                         }
@@ -105,7 +106,7 @@ public class SortPrevisualisation : MonoBehaviour, IPointerEnterHandler, IPointe
             }
         }
 
-        
+
 
         if (mouse_over && Input.GetMouseButtonDown(0))
         {
@@ -133,8 +134,7 @@ public class SortPrevisualisation : MonoBehaviour, IPointerEnterHandler, IPointe
                     child.tag == "MouseOver")
                 {
                     childs.Add(child);
-                    defaultMaterials.Add(child.GetComponent<MeshRenderer>().material);
-                    child.GetComponent<MeshRenderer>().material = material;
+                    child.GetComponent<MeshRenderer>().materials = new Material[] { child.GetComponent<MeshRenderer>().material, material };
                 }
             }
             canClean = true;
@@ -163,18 +163,15 @@ public class SortPrevisualisation : MonoBehaviour, IPointerEnterHandler, IPointe
     {
         for (int i = 0; i < childs.Count; i++)
         {
-            childs[i].GetComponent<MeshRenderer>().material = defaultMaterials[i];
+            childs[i].GetComponent<MeshRenderer>().materials = new Material[] { childs[i].GetComponent<MeshRenderer>().materials[0] };
         }
 
         for (int i = 0; i < oldsHitedCases.Count; i++)
         {
             if (!childs.Contains(oldsHitedCases[i]))
-                oldsHitedCases[i].GetComponent<MeshRenderer>().material = hitedMaterials[i];
+                oldsHitedCases[i].GetComponent<MeshRenderer>().materials = new Material[] { oldsHitedCases[i].GetComponent<MeshRenderer>().material };
         }
-
         childs.Clear();
-        defaultMaterials.Clear();
         oldsHitedCases.Clear();
-        hitedMaterials.Clear();
     }
 }

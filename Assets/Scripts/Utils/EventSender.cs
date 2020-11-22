@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 //https://forum.unity.com/threads/variable-listener.468721/
 public class EventSender : MonoBehaviour

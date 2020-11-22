@@ -22,12 +22,9 @@ public class GameLoader : MonoBehaviour
         if (map == null)
             throw new Exception("map not given");
 
-        DisplayMap(map, new Dictionary<int, string>
-        {
-            { 0, "Map/Floor" },
-            { -1, "Map/Wall" }
-        });
-        DrawLines();
+      
+        MapController mapController = mapObject.AddComponent<MapController>();
+        mapController.map = map;
         mapObject.SetActive(true);
 
         List<Personnage> personnages = new List<Personnage>();
@@ -79,96 +76,6 @@ public class GameLoader : MonoBehaviour
             gameController.SetActive(true);
         }
     }
-
-
-    //void Update()
-    //{
-    //    /*
-    //    if (gameObject.activeSelf &&
-    //       (oldXSize != xSize || oldZSize != zSize || oldSpawnWallRate != spawnWallRate))
-    //    {
-    //        if (mapIsInit)
-    //        {
-    //            RemoveLines();
-    //        }
-    //        InitMap(xSize, zSize, spawnWallRate);
-    //        mapIsInit = true;
-    //        oldXSize = xSize;
-    //        oldZSize = zSize;
-    //        oldSpawnWallRate = spawnWallRate;
-    //    }
-    //    */
-    //}
-
-
-    // Map
-    private void DisplayMap(int[][] map, Dictionary<int, string> mapping)
-    {
-        Vector3 vector = new Vector3();
-        Dictionary<int, GameObject> objectMapping = MapGenerator.GetAssociateGameObject(mapping);
-
-        for (int z = 0; z < map.Length; z++)
-        {
-            vector.z = z;
-            for (int x = 0; x < map[z].Length; x++)
-            {
-                vector.x = x;
-
-                if (!mapping.ContainsKey(map[z][x]))
-                {
-                    throw new Exception("Mapping missing a key : " + map[z][x]);
-                }
-                Transform transformObject = Instantiate(objectMapping[map[z][x]].transform);
-                transformObject.localPosition = vector;
-                transformObject.SetParent(mapObject.transform, false);
-            }
-        }
-    }
-
-    private void DrawLines()
-    {
-        Material line = (Material)Resources.Load("Map/LineMaterial");
-        float decalageLine = 0.5f;
-
-        for (int z = 0; z < map.Length; z++)
-        {
-            for (int x = 0; x < map[z].Length; x++)
-            {
-                DrawLine(line, new Vector3(x - decalageLine, 1, 0 - decalageLine), new Vector3(x - decalageLine, 1, map.Length - decalageLine));
-            }
-
-            DrawLine(line, new Vector3(0 - decalageLine, 1, z - decalageLine), new Vector3(map[z].Length - decalageLine, 1, z - decalageLine));
-        }
-
-        DrawLine(line, new Vector3(0 - decalageLine, 1, map.Length - decalageLine), new Vector3(map[0].Length - decalageLine, 1, map.Length - decalageLine));
-        DrawLine(line, new Vector3(map[0].Length - decalageLine, 1, 0 - decalageLine), new Vector3(map[0].Length - decalageLine, 1, map[0].Length - decalageLine));
-    }
-
-    private void RemoveLines()
-    {
-        foreach (Transform child in mapObject.transform)
-        {
-            if (child.tag == "line")
-                Destroy(child.gameObject);
-        }
-    }
-
-    private void DrawLine(Material line, Vector3 start, Vector3 end)
-    {
-        GameObject myLine = new GameObject();
-        myLine.transform.SetParent(mapObject.transform);
-        myLine.transform.position = start;
-        myLine.AddComponent<LineRenderer>();
-
-        LineRenderer lr = myLine.GetComponent<LineRenderer>();
-        lr.material = line;
-        lr.startWidth = 0.1f;
-        lr.SetPosition(0, start);
-        lr.SetPosition(1, end);
-        lr.tag = "line";
-        // GameObject.Destroy(myLine, duration);
-    }
-
 
     //Personnage
     private FightPlayController PlaceAtRandomPosition(string path, int value)

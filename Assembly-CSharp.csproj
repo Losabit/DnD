@@ -68,6 +68,7 @@
     <Compile Include="Assets\Scripts\Controllers\Fight\PlayerController.cs" />
     <Compile Include="Assets\Scripts\Controllers\FightController.cs" />
     <Compile Include="Assets\Scripts\Controllers\GameController.cs" />
+    <Compile Include="Assets\Scripts\Controllers\MapController.cs" />
     <Compile Include="Assets\Scripts\GameLoader.cs" />
     <Compile Include="Assets\Scripts\IA\AStar.cs" />
     <Compile Include="Assets\Scripts\MapGenerator.cs" />
@@ -83,11 +84,18 @@
     <Compile Include="Assets\Scripts\UI\Fight\SortsPrinter.cs" />
     <Compile Include="Assets\Scripts\UI\ListPersonnages.cs" />
     <Compile Include="Assets\Scripts\UI\MainMenu.cs" />
+    <Compile Include="Assets\Scripts\UI\Map Editor\MapEditor.cs" />
+    <Compile Include="Assets\Scripts\UI\Map Editor\MapPrinter.cs" />
+    <Compile Include="Assets\Scripts\UI\Map Editor\ObjectPrinter.cs" />
+    <Compile Include="Assets\Scripts\UI\Map Editor\TexturePrinter.cs" />
     <Compile Include="Assets\Scripts\UI\PersonnageEditor.cs" />
     <Compile Include="Assets\Scripts\UI\TurnView.cs" />
     <Compile Include="Assets\Scripts\Utils\EventSender.cs" />
     <Compile Include="Assets\Scripts\Utils\Extensions.cs" />
+    <Compile Include="Assets\Scripts\Utils\IMG2Sprite.cs" />
+    <Compile Include="Assets\Scripts\Utils\SnapshotCamera.cs" />
     <Compile Include="Assets\Scripts\Utils\TimeKeeper.cs" />
+    <Compile Include="Assets\Scripts\Utils\ValueChangedEvent.cs" />
     <Reference Include="UnityEngine">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.4.13f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>
