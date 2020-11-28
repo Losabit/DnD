@@ -50,6 +50,12 @@ public class MainMenu : MonoBehaviour
     public void EditorButtonOnClick(GameObject toActivate)
     {
         toActivate.SetActive(true);
+        gameObject.SetActive(false);
+    }
+
+    public void PersonnageEditorButtonOnClick(GameObject toActivate)
+    {
+        toActivate.SetActive(true);
         
         Dictionary<int, Personnage.Initialization> dict = new Dictionary<int, Personnage.Initialization>();
         dict.Add(1, new Personnage.Initialization
@@ -68,7 +74,7 @@ public class MainMenu : MonoBehaviour
     public void MapEditorButtonOnClick(GameObject toActivate)
     {
         toActivate.SetActive(true);
-
+        Camera.main.gameObject.AddComponent<MapExplorer>();
         GameLoader loader = gameLoader.GetComponent<GameLoader>();
         loader.map = MapGenerator.InitRandomMap(20, 20, 0f);
         loader.controllerType = Assets.Scripts.Controllers.ControllerType.Editor;

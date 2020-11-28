@@ -1,0 +1,11 @@
+{
+  "Name": "Donjon Chiatique",
+  "History": "Ceci est la donjon le plus merdique jamais inventé",
+  "Image":  "icone.jpg",
+  "Maps": [
+    {
+      "Path": "",
+      "Rotation": 45
+    }
+  ]
+}

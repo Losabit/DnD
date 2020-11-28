@@ -62,6 +62,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\Controllers\Camera\MapExplorer.cs" />
     <Compile Include="Assets\Scripts\Controllers\EditorController.cs" />
     <Compile Include="Assets\Scripts\Controllers\Fight\FightPlayController.cs" />
     <Compile Include="Assets\Scripts\Controllers\Fight\IAController.cs" />
@@ -75,10 +76,12 @@
     <Compile Include="Assets\Scripts\Modding\MapModding.cs" />
     <Compile Include="Assets\Scripts\Modding\PersonnageModding.cs" />
     <Compile Include="Assets\Scripts\Modding\SortModding.cs" />
+    <Compile Include="Assets\Scripts\Models\Dungeon.cs" />
     <Compile Include="Assets\Scripts\Models\Map.cs" />
     <Compile Include="Assets\Scripts\Models\Personnage.cs" />
     <Compile Include="Assets\Scripts\MouseAction.cs" />
     <Compile Include="Assets\Scripts\Personnage.cs" />
+    <Compile Include="Assets\Scripts\UI\DungeonPrinter.cs" />
     <Compile Include="Assets\Scripts\UI\Fight\FightView.cs" />
     <Compile Include="Assets\Scripts\UI\Fight\SortPrevisualisation.cs" />
     <Compile Include="Assets\Scripts\UI\Fight\SortsPrinter.cs" />
